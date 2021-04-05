@@ -11,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,6 +41,21 @@ public class Product {
 	@JoinColumn(name = "produit_id")
 	List<Comment> comments = new ArrayList<>();
 
+	@ManyToMany(
+			fetch = FetchType.LAZY,
+			cascade = { 
+					CascadeType.PERSIST, 
+					CascadeType.MERGE 
+					}	
+			)
+	@JoinTable(
+			name = "categorie_produit",
+			joinColumns = @JoinColumn(name = "produit_id"), 
+			inverseJoinColumns = @JoinColumn(name = "categorie_id")
+			)
+	List<Category> categories = new ArrayList<>();
+	
+	
 	public int getProductId() {
 		return productId;
 	}
@@ -77,6 +94,14 @@ public class Product {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 	
 }

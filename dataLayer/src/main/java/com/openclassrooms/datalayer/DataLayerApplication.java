@@ -9,7 +9,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.openclassrooms.datalayer.model.Category;
 import com.openclassrooms.datalayer.model.Product;
 import com.openclassrooms.datalayer.service.CategoryService;
 import com.openclassrooms.datalayer.service.CommentService;
@@ -42,13 +41,8 @@ public class DataLayerApplication implements CommandLineRunner {
 		productId1.getComments().forEach(
 				comment -> System.out.println(comment.getContent()));	
 		
-		Optional<Category> optCategory = categoryService.getCategoryById(1);
-		Category categoryId1 = optCategory.get();
-		
-		System.out.println(categoryId1.getName());	
- 
-		categoryId1.getProducts().forEach(
-				product -> System.out.println(product.getName()));
+		productId1.getCategories().forEach(
+				category -> System.out.println(category.getName()));
 	}
 
 }
