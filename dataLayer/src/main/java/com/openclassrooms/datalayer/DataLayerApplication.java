@@ -39,8 +39,8 @@ public class DataLayerApplication implements CommandLineRunner {
  
 		System.out.println(productId1.getName());	
  
-		productId1.getComments().forEach(
-				comment -> System.out.println(comment.getContent()));	
+		productId1.getCategories().forEach(
+				category -> System.out.println(category.getName()));	
 		
 		Optional<Category> optCategory = categoryService.getCategoryById(1);
 		Category categoryId1 = optCategory.get();
