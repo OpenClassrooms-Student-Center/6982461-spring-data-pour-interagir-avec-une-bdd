@@ -23,9 +23,9 @@ DROP TABLE IF EXISTS `categorie`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorie` (
-  `categorieid` int NOT NULL AUTO_INCREMENT,
+  `categorie_id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`categorieid`)
+  PRIMARY KEY (`categorie_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -47,12 +47,12 @@ DROP TABLE IF EXISTS `categorie_produit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `categorie_produit` (
-  `categorieid` int NOT NULL,
-  `produitid` int NOT NULL,
-  PRIMARY KEY (`categorieid`,`produitid`),
-  KEY `produitid_idx` (`produitid`),
-  CONSTRAINT `categorieid` FOREIGN KEY (`categorieid`) REFERENCES `categorie` (`categorieid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `produit_id` FOREIGN KEY (`produitid`) REFERENCES `produit` (`produitid`) ON DELETE CASCADE ON UPDATE CASCADE
+  `categorie_id` int NOT NULL,
+  `produit_id` int NOT NULL,
+  PRIMARY KEY (`categorie_id`,`produit_id`),
+  KEY `produitid_idx` (`produit_id`),
+  CONSTRAINT `categorieid` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`categorie_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `produit_id` FOREIGN KEY (`produit_id`) REFERENCES `produit` (`produit_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -74,12 +74,12 @@ DROP TABLE IF EXISTS `commentaire`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `commentaire` (
-  `commentaireid` int NOT NULL AUTO_INCREMENT,
+  `commentaire_id` int NOT NULL AUTO_INCREMENT,
   `contenu` varchar(255) DEFAULT NULL,
-  `produitid` int NOT NULL,
-  PRIMARY KEY (`commentaireid`),
-  KEY `produitid_idx` (`produitid`),
-  CONSTRAINT `produitid` FOREIGN KEY (`produitid`) REFERENCES `produit` (`produitid`) ON DELETE CASCADE ON UPDATE CASCADE
+  `produit_id` int NOT NULL,
+  PRIMARY KEY (`commentaire_id`),
+  KEY `produitid_idx` (`produit_id`),
+  CONSTRAINT `produitid` FOREIGN KEY (`produit_id`) REFERENCES `produit` (`produit_id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -101,11 +101,11 @@ DROP TABLE IF EXISTS `produit`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `produit` (
-  `produitid` int NOT NULL AUTO_INCREMENT,
+  `produit_id` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `cout` int DEFAULT NULL,
-  PRIMARY KEY (`produitid`)
+  PRIMARY KEY (`produit_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-04-05 11:45:10
+-- Dump completed on 2021-04-05 12:54:40
