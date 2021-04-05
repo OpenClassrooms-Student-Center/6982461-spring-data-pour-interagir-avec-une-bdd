@@ -65,4 +65,15 @@ public class Category {
 		this.products = products;
 	}
 	
+	public void addProduct(Product product) {
+		products.add(product);
+		product.getCategories().add(this);
+	}
+ 
+	public void removeProduit(Product product) {
+		products.remove(product);
+		product.getCategories().remove(this);
+	}
+
+	
 }

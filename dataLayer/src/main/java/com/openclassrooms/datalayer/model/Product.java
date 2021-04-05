@@ -6,11 +6,9 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -34,14 +32,21 @@ public class Product {
 	private int cost;
 	
 	@OneToMany(
-			cascade = CascadeType.ALL, 
-			orphanRemoval = true, 
-			fetch = FetchType.EAGER)
-	@JoinColumn(name = "produit_id")
+			mappedBy = "product", 
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+					},
+			orphanRemoval = true
+			)
 	List<Comment> comments = new ArrayList<>();
 
 	@ManyToMany(
-			mappedBy = "products"
+			mappedBy = "products",
+			cascade = { 
+					CascadeType.PERSIST, 
+					CascadeType.MERGE 
+					}
 			)
 	private List<Category> categories = new ArrayList<>();
 	
@@ -91,6 +96,16 @@ public class Product {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+	
+	public void addComment(Comment comment) {
+		comments.add(comment);
+		comment.setProduct(this);
+	}
+ 
+	public void removeComment(Comment comment) {
+		comments.remove(comment);
+		comment.setProduct(null);
 	}
 	
 }
