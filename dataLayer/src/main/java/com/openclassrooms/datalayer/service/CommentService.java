@@ -1,5 +1,7 @@
 package com.openclassrooms.datalayer.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,10 @@ public class CommentService {
 	
 	public Iterable<Comment> getComments() {
 		return commentRepository.findAll();
+	}
+	
+	public Optional<Comment> getCommentById(Integer id) {
+		return commentRepository.findById(id);
 	}
 	
 }
