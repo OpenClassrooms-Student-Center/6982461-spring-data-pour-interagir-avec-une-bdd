@@ -22,6 +22,10 @@ public class CommentService {
 		return commentRepository.findById(id);
 	}
 	
+	public Iterable<Comment> getCommentContaining(String expression) {
+		return commentRepository.findByContentContaining(expression);
+	}
+	
 	public Comment saveComment(Comment comment) {
 		return commentRepository.save(comment);
 	}

@@ -30,6 +30,10 @@ public class ProductService {
 		return productRepository.findByCategoriesName(name);
 	}
 	
+	public Iterable<Product> getProductsByCostLessThan(Integer cost) {
+		return productRepository.findByCostLessThan(cost);
+	}
+	
 	public Product saveProduct(Product product) {
 		return productRepository.save(product);
 	}

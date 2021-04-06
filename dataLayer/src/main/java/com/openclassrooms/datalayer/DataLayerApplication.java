@@ -7,6 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.openclassrooms.datalayer.model.Category;
+import com.openclassrooms.datalayer.model.Comment;
 import com.openclassrooms.datalayer.model.Product;
 import com.openclassrooms.datalayer.service.CategoryService;
 import com.openclassrooms.datalayer.service.CommentService;
@@ -37,6 +39,18 @@ public class DataLayerApplication implements CommandLineRunner {
 		
 		searchResults = productService.getProductsByCategoryName("Standard");
 		searchResults.forEach(product -> System.out.println(product.getName()));
+		
+		searchResults = productService.getProductsByCostLessThan(1000);
+		searchResults.forEach(product -> System.out.println(product.getName()));
+		
+		Iterable<Category> searchCategory = categoryService.getCategoryByName("Standard");
+		searchCategory.forEach(category -> System.out.println(category.getCategoryId()));
+		
+		searchCategory = categoryService.getCategoriesByProductName("AssuranceTousRisques");
+		searchCategory.forEach(category -> System.out.println(category.getName()));
+		
+		Iterable<Comment> searchComments = commentService.getCommentContaining("deçu");
+		searchComments.forEach(comment -> System.out.println(comment.getContent()));
 
 	}
 

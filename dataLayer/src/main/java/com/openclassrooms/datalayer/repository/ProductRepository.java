@@ -19,6 +19,8 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 	
 	@Query(value = "SELECT * FROM produit WHERE cout = :cout", nativeQuery = true)
 	public Iterable<Product> findByCostNative(@Param("cout") Integer cost);
+	
+	public Iterable<Product> findByCostLessThan(Integer cost);
 
 
 }
