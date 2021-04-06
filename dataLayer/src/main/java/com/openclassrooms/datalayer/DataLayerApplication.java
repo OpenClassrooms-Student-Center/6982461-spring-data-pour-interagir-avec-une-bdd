@@ -1,7 +1,5 @@
 package com.openclassrooms.datalayer;
 
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.openclassrooms.datalayer.model.Category;
-import com.openclassrooms.datalayer.model.Comment;
 import com.openclassrooms.datalayer.model.Product;
 import com.openclassrooms.datalayer.service.CategoryService;
 import com.openclassrooms.datalayer.service.CommentService;
@@ -35,31 +32,27 @@ public class DataLayerApplication implements CommandLineRunner {
 	@Override
 	@Transactional
 	public void run(String... args) throws Exception {
-		Optional<Product> optProduct = productService.getProductById(1);
-		Product productId1 = optProduct.get();
- 
-		System.out.println(productId1.getName());	
- 
-		productId1.getCategories().forEach(
+
+		categoryService.getCategories().forEach(
 				category -> System.out.println(category.getName()));
 		
-		productId1.getComments().forEach(
-				comment -> System.out.println(comment.getContent()));	
+		Category newCategory = new Category();
+		newCategory.setName("Promotion");
 		
-		Optional<Category> optCategory = categoryService.getCategoryById(1);
-		Category categoryId1 = optCategory.get();
+		newCategory = categoryService.addCategory(newCategory);
 		
-		System.out.println(categoryId1.getName());	
- 
-		categoryId1.getProducts().forEach(
+		categoryService.getCategories().forEach(
+				category -> System.out.println(category.getName()));
+		
+		Product newProduct = new Product();
+		newProduct.setName("AssuranceTousRisquesFidelite");
+		newProduct.setDescription("Les garanties de l'assurance tous risques à un prix moindre grâce à votre fidélité!");
+		newProduct.setCost(1100);
+		
+		newProduct = productService.addProduct(newProduct);
+		
+		productService.getProducts().forEach(
 				product -> System.out.println(product.getName()));
-		
-		Optional<Comment> optComment = commentService.getCommentById(1);
-		Comment commentId1 = optComment.get();
-		
-		System.out.println(commentId1.getContent());
-		System.out.println(commentId1.getProduct().getName());
-
 	}
 
 }
