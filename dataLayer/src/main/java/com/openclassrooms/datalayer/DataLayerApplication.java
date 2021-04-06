@@ -15,13 +15,13 @@ import com.openclassrooms.datalayer.service.ProductService;
 
 @SpringBootApplication
 public class DataLayerApplication implements CommandLineRunner {
-	
+
 	@Autowired
 	private ProductService productService;
 
 	@Autowired
 	private CategoryService categoryService;
-	
+
 	@Autowired
 	private CommentService commentService;
 
@@ -45,14 +45,19 @@ public class DataLayerApplication implements CommandLineRunner {
 				category -> System.out.println(category.getName()));
 		
 		Product newProduct = new Product();
-		newProduct.setName("AssuranceTousRisquesFidelite");
-		newProduct.setDescription("Les garanties de l'assurance tous risques à un prix moindre grâce à votre fidélité!");
+		newProduct.setName("AssuranceAuTiersFidelite");
+		newProduct.setDescription("Les garanties de l'assurance au tiers à un prix moindre grâce à votre fidélité!");
 		newProduct.setCost(1100);
+		
+		newCategory.addProduct(newProduct);
 		
 		newProduct = productService.addProduct(newProduct);
 		
 		productService.getProducts().forEach(
 				product -> System.out.println(product.getName()));
+
+		newProduct.getCategories().forEach(
+				category -> System.out.println(category.getName()));
 	}
 
 }
