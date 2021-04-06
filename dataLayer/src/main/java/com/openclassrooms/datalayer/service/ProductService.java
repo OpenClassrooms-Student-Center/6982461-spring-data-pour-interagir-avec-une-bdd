@@ -22,6 +22,10 @@ public class ProductService {
 		return productRepository.findById(id);
 	}	
 	
+	public Iterable<Product> getProductsByName(String name) {
+		return productRepository.findByName(name);
+	}
+	
 	public Product saveProduct(Product product) {
 		return productRepository.save(product);
 	}

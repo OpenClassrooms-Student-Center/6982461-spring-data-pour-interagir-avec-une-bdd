@@ -32,14 +32,9 @@ public class DataLayerApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 
-		Product existingProduct = productService.getProductById(1).get();
-		System.out.println(existingProduct.getCost());
-		
-		existingProduct.setCost(3000);
-		productService.saveProduct(existingProduct);
-		
-		existingProduct = productService.getProductById(1).get();
-		System.out.println(existingProduct.getCost());
+		Iterable<Product> searchResults = productService.getProductsByName("AssuranceTousRisques");
+		searchResults.forEach(product -> System.out.println(product.getProductId()));
+
 	}
 
 }
