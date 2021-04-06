@@ -22,4 +22,8 @@ public class CommentService {
 		return commentRepository.findById(id);
 	}
 	
+	public Comment addComment(Comment comment) {
+		return commentRepository.save(comment);
+	}
+	
 }

@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.openclassrooms.datalayer.model.Category;
+import com.openclassrooms.datalayer.model.Comment;
 import com.openclassrooms.datalayer.model.Product;
 import com.openclassrooms.datalayer.service.CategoryService;
 import com.openclassrooms.datalayer.service.CommentService;
@@ -58,6 +59,12 @@ public class DataLayerApplication implements CommandLineRunner {
 
 		newProduct.getCategories().forEach(
 				category -> System.out.println(category.getName()));
+		
+		Comment newComment = new Comment();
+		newComment.setContent("Assurance extraordinaire!");
+		newProduct.addComment(newComment);
+
+		commentService.addComment(newComment);
 	}
 
 }
