@@ -70,7 +70,7 @@ public class Category {
 		product.getCategories().add(this);
 	}
  
-	public void removeProduit(Product product) {
+	public void removeProduct(Product product) {
 		products.remove(product);
 		product.getCategories().remove(this);
 	}
