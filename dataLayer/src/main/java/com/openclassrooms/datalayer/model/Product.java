@@ -33,20 +33,14 @@ public class Product {
 	
 	@OneToMany(
 			mappedBy = "product", 
-			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
-					},
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 			)
 	List<Comment> comments = new ArrayList<>();
 
 	@ManyToMany(
 			mappedBy = "products",
-			cascade = { 
-					CascadeType.PERSIST, 
-					CascadeType.MERGE 
-					}
+			cascade = CascadeType.ALL
 			)
 	private List<Category> categories = new ArrayList<>();
 	
