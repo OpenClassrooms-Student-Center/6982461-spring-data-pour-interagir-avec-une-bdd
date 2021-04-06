@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
+@DynamicUpdate
 @Table(name = "commentaire")
 public class Comment {
 
@@ -23,7 +26,10 @@ public class Comment {
 	private String content;
 	
 	@ManyToOne(
-			cascade = CascadeType.ALL
+			cascade = { 
+					CascadeType.PERSIST, 
+					CascadeType.MERGE 
+					}
 			)
 	@JoinColumn(name="produit_id")
 	private Product product;

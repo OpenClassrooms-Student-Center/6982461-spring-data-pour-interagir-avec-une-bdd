@@ -13,7 +13,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 @Entity
+@DynamicUpdate
 @Table(name = "produit")
 public class Product {
 
@@ -33,10 +36,7 @@ public class Product {
 	
 	@OneToMany(
 			mappedBy = "product", 
-			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
-					},
+			cascade = CascadeType.ALL,
 			orphanRemoval = true
 			)
 	List<Comment> comments = new ArrayList<>();
